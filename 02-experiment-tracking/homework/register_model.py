@@ -47,6 +47,8 @@ def train_and_log_model(data_path, params):
         test_rmse = mean_squared_error(y_test, rf.predict(X_test), squared=False)
         mlflow.log_metric("test_rmse", test_rmse)
 
+   
+
 
 def run(data_path, log_top):
 
@@ -55,7 +57,7 @@ def run(data_path, log_top):
     # retrieve the top_n model runs and log the models to MLflow
     experiment = client.get_experiment_by_name(HPO_EXPERIMENT_NAME)
     runs = client.search_runs(
-        experiment_ids=experiment.experiment_id,
+        experiment_ids= experiment.experiment_id,
         run_view_type=ViewType.ACTIVE_ONLY,
         max_results=log_top,
         order_by=["metrics.rmse ASC"]
@@ -65,10 +67,19 @@ def run(data_path, log_top):
 
     # select the model with the lowest test RMSE
     experiment = client.get_experiment_by_name(EXPERIMENT_NAME)
-    # best_run = client.search_runs( ...  )[0]
+    best_run = client.search_runs( experiment_ids = experiment.experiment_id, 
+    run_view_type = ViewType.ACTIVE_ONLY,
+    max_results = 1,
+    order_by = ["metrics.test_rmse ASC"]
+    
+      )[0] 
 
     # register the best model
-    # mlflow.register_model( ... )
+    mlflow.register_model( 
+        model_uri = f"runs:/{best_run.info.run_id}/model",
+        name = "nyc-duration"
+
+     )
 
 
 if __name__ == '__main__':

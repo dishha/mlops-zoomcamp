@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/dishamendiratta/Desktop/applications/mlops-zoomcamp/02-experiment-tracking/homework/mlruns/0/57e45b66094342c1929114bf67e666f5/artifacts
+end_time: 1660372729883
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 57e45b66094342c1929114bf67e666f5
+run_uuid: 57e45b66094342c1929114bf67e666f5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1660372714959
+status: 3
+tags: []
+user_id: dishamendiratta
